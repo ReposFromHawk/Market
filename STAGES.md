@@ -156,8 +156,36 @@ Since PriceRule class don't have any properties and constructors, the compilor f
 
 **STEP 9**
 
+
 Time to implement price calculations based on rules.
 
 Price Rules Now Implemented and Related Test for the Scenario Past.
 
 
+**STEP 10**
+
+
+A few edge cases added for tests.
+
+REFACTORING AND EXTENDING THE CODE
+
+1. I think, rather then the pricing hard coded, we can add it to the pricing rule. This will be a better solution.
+ In Setup section of Tests I made this change to trigger a refactoring cycle:
+
+        [SetUp]
+        public void Setup()
+        {
+            var priceRules = new List<PriceRule>
+            {
+                new PriceRule("A",50, 3, 130),
+                new PriceRule("B", 30, 2, 45),
+                new PriceRule("C", 20),
+                new PriceRule("D", 15)
+
+            };
+            _checkout = new Checkout(priceRules);
+        }
+        
+        So it fails to compile now.
+
+In this stage Pricing Rules now contains the standard prices and all calculations look correct.

@@ -13,8 +13,10 @@ namespace Market.Checkout.Tests
         {
             var priceRules = new List<PriceRule>
             {
-                new PriceRule("A", 3, 130),
-                new PriceRule("B", 2, 45)
+                new PriceRule("A",50, 3, 130),
+                new PriceRule("B", 30, 2, 45),
+                new PriceRule("C", 20),
+                new PriceRule("D", 15)
             };
             _checkout = new CheckOut(priceRules);
         }
@@ -70,7 +72,10 @@ namespace Market.Checkout.Tests
         {
             new object[] { new List<string>{ "A", "A", "A" }, 130 },
             new object[] { new List<string>{ "A", "A"}, 100 },
-            new object[] { new List<string> { "A", "A", "A", "A", "A","A"},260 }
+            new object[] { new List<string> { "A", "A", "A", "A", "A","A"},260 },
+            new object[] { new List<string>{ "A","C","B","D", "A", "A" }, 195 },
+            new object[] { new List<string>{ "B","C","B","D", "A", "A" }, 180 },
+            new object[] { new List<string>{ "B","B","B","D", "A", "A" }, 190 },
         };
         [TestCaseSource(nameof(_specialOfferCases))]
         public void Scan_MultipleSingleSkuItems_ShouldReturnCorrectTotalPrice(IEnumerable<string> skus, int expectedPrice)

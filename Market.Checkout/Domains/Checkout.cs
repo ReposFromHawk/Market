@@ -16,41 +16,52 @@ namespace Market.Checkout.Domains
         private readonly List<PriceRule> _rules;
         //We need to know the individual prices for the items.
         //So Create a dictionary of the items and their prices
-        private Dictionary<string, int> _itemPrices = new Dictionary<string, int>()
-        {
-            { "A", 50 },
-            { "B", 30 },
-            { "C", 20 },
-            { "D", 15 }
-        };
+        //private Dictionary<string, int> _itemPrices = new Dictionary<string, int>()
+        //{
+        //    { "A", 50 },
+        //    { "B", 30 },
+        //    { "C", 20 },
+        //    { "D", 15 }
+        //};
 
 
         //Storage for the scanned items
         private readonly Dictionary<string, int> _scannedItems;
-       
+
 
         public int GetTotalPrice()
         {
+            //Get the total price of the scanned items and sum
             int total = 0;
             foreach (var item in _scannedItems)
             {
-                if (_rules.Any(x => x.Sku.Equals(item.Key, StringComparison.OrdinalIgnoreCase) && x.SpecialQuantity <= item.Value))
+
+                if (_rules.Any(x => x.Sku.Equals(item.Key, StringComparison.OrdinalIgnoreCase)))
                 {
+
                     var rule = _rules.First(s => s.Sku == item.Key);
-                    var set = item.Value / rule.SpecialQuantity;
-                    var remainder = item.Value % rule.SpecialQuantity;
-                    total += rule.SpecialPrice * set;
-                    if (remainder > 0)
+                    if (rule.SpecialQuantity.HasValue && rule.SpecialPrice.HasValue)
                     {
-                        total += _itemPrices[item.Key];
+                        var set = item.Value / rule.SpecialQuantity;
+                        var remainder = item.Value % rule.SpecialQuantity;
+                        if (rule.SpecialPrice.HasValue && set.HasValue)
+                        {
+                            total += rule.SpecialPrice.Value * set.Value;
+                        }
+                        if (remainder > 0)
+                        {
+                            total += rule.Price * remainder.Value;
+                        }
+                        continue;
                     }
-                    continue;
-                }
-                else
-                {
-                    total += _itemPrices[item.Key] * item.Value;
+                    else
+                    {
+                        total += rule.Price * item.Value;
+                    }
+
                 }
             }
+
             return total;
         }
 
