@@ -138,5 +138,20 @@ Assert.That(expectedPrice == checkoutTotal, Is.True)
   Expected: True
   But was:  False
 
+**STEP 8**
+
+I added a SETUP section for the tests.
+I initialized the PriceRules as a list of PriceRule.
+So in the list I added the given prices for special quantities.
+
+var priceRules = new List<PriceRule>
+            {
+                new PriceRule("A", 3, 130),
+                new PriceRule("B", 2, 45)
+
+            };
+
+Since PriceRule class don't have any properties and constructors, the compilor fails.So requiredproperties are created at this stage.
+
 
 

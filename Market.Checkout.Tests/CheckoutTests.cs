@@ -11,7 +11,11 @@ namespace Market.Checkout.Tests
         [SetUp]
         public void Setup()
         {
-            var priceRules = new List<PriceRule>();
+            var priceRules = new List<PriceRule>
+            {
+                new PriceRule("A", 3, 130),
+                new PriceRule("B", 2, 45)
+            };
             _checkout = new CheckOut(priceRules);
         }
 
