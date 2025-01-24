@@ -31,3 +31,15 @@ RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig,
 MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
 Check Point.
+
+After complete the basic implementationof the methods:
+Run Tests and Result as follows:
+
+ Scan_SingleItemA_ShouldReturnPriceOf50
+   Source: CheckoutTests.cs line 14
+   Duration: 33 ms
+
+  Message: 
+  Expected single item A to cost 50
+  Assert.That(50 == checkoutTotal, Is.True)
+  Expected: True

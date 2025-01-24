@@ -6,12 +6,12 @@ namespace Market.Checkout.Domains
     {
         public int GetTotalPrice()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public void Scan(string v)
         {
-            throw new NotImplementedException();
+            string read = v;
         }
     }
 }
