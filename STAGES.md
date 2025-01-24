@@ -154,4 +154,10 @@ var priceRules = new List<PriceRule>
 Since PriceRule class don't have any properties and constructors, the compilor fails.So requiredproperties are created at this stage.
 
 
+**STEP 9**
+
+Time to implement price calculations based on rules.
+
+Price Rules Now Implemented and Related Test for the Scenario Past.
+
 

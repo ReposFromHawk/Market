@@ -37,7 +37,7 @@ namespace Market.Checkout.Tests
             _checkout.Scan(sku);
             int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
-            Assert.That(expectedPrice == checkoutTotal, $"Expected single item A to cost {expectedPrice}");
+            Assert.That(expectedPrice == checkoutTotal, $"Expected single item A to cost {expectedPrice} but got {checkoutTotal}");
         }
 
 
@@ -62,7 +62,7 @@ namespace Market.Checkout.Tests
             _checkout.Scan(sku2);
             int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
-            Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice}");
+            Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice} but got {checkoutTotal}");
         }
 
 
@@ -83,7 +83,7 @@ namespace Market.Checkout.Tests
             }
             int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
-            Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice}");
+            Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice} But got {checkoutTotal}");
         }
 
 

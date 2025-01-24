@@ -11,8 +11,8 @@ namespace Market.Checkout.Domains
         public PriceRule(string sku, int specialQuantity, int specialPrice)
         {
             _sku = sku;
-            _specialPrice = specialQuantity;
-            _specialQuantity = specialPrice;
+            _specialPrice = specialPrice;
+            _specialQuantity = specialQuantity;
         }
         private string _sku;
         private int _specialPrice;
