@@ -20,7 +20,7 @@ namespace Market.Checkout.Domains
 
         //Storage for the scanned items
         private readonly Dictionary<string, int> _scannedItems;
-        public CheckOut() { _scannedItems = new Dictionary<string, int>(); }
+        public CheckOut(List<PriceRule> rules) { _scannedItems = new Dictionary<string, int>(); }
 
         public int GetTotalPrice()
         {

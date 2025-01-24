@@ -7,6 +7,16 @@ namespace Market.Checkout.Tests
     [TestFixture]
     public class CheckoutTests
     {
+        private ICheckout _checkout;
+        [SetUp]
+        public void Setup()
+        {
+            var priceRules = new List<PriceRule>();
+            _checkout = new CheckOut(priceRules);
+        }
+
+
+
         /// <summary>
         /// This is the first failing test for the checkout.
         ///  Entry point the define the Interface.
@@ -18,11 +28,10 @@ namespace Market.Checkout.Tests
         [TestCase("D", 15)]
         public void Scan_SingleItem_ShouldReturnItsPriceCorrectPrice(string sku, int expectedPrice)
         {
-            //Arrange            
-            ICheckout checkout = new CheckOut(); 
+           
             //Act
-            checkout.Scan(sku);
-            int checkoutTotal = checkout.GetTotalPrice();
+            _checkout.Scan(sku);
+            int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
             Assert.That(expectedPrice == checkoutTotal, $"Expected single item A to cost {expectedPrice}");
         }
@@ -43,12 +52,11 @@ namespace Market.Checkout.Tests
         [TestCaseSource(nameof(_singlePriceCases))]
         public void Scan_MultipleItems_ShouldReturnCorrectTotalPrice(string sku1, string sku2, int expectedPrice)
         {
-            //Arrange            
-            ICheckout checkout = new CheckOut();
+           
             //Act
-            checkout.Scan(sku1);
-            checkout.Scan(sku2);
-            int checkoutTotal = checkout.GetTotalPrice();
+            _checkout.Scan(sku1);
+            _checkout.Scan(sku2);
+            int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
             Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice}");
         }
@@ -63,14 +71,13 @@ namespace Market.Checkout.Tests
         [TestCaseSource(nameof(_specialOfferCases))]
         public void Scan_MultipleSingleSkuItems_ShouldReturnCorrectTotalPrice(IEnumerable<string> skus, int expectedPrice)
         {
-            //Arrange            
-            ICheckout checkout = new CheckOut();
+            
             //Act
             foreach (var sku in skus)
             {
-                checkout.Scan(sku);
+                _checkout.Scan(sku);
             }
-            int checkoutTotal = checkout.GetTotalPrice();
+            int checkoutTotal = _checkout.GetTotalPrice();
             //Assert
             Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice}");
         }
