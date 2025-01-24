@@ -43,3 +43,14 @@ Run Tests and Result as follows:
   Expected single item A to cost 50
   Assert.That(50 == checkoutTotal, Is.True)
   Expected: True
+
+
+**STEP 3:**
+
+
+Now we discovered that we need to find the price of scanned SKU.
+So prices should come from somewhere else and our system should find prices based on SKUs.
+Therefor I added the logic to return 50 for SKU A which is hard coded.
+This will pass the test.
+Since this is the first passing test, and the logic is decoupled, the next stages shouldn't fail this test for successul development process.
+
