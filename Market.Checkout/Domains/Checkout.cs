@@ -13,16 +13,7 @@ namespace Market.Checkout.Domains
             _scannedItems = new Dictionary<string, int>();
         }
 
-        private readonly List<PriceRule> _rules;
-        //We need to know the individual prices for the items.
-        //So Create a dictionary of the items and their prices
-        //private Dictionary<string, int> _itemPrices = new Dictionary<string, int>()
-        //{
-        //    { "A", 50 },
-        //    { "B", 30 },
-        //    { "C", 20 },
-        //    { "D", 15 }
-        //};
+        private readonly List<PriceRule> _rules;       
 
 
         //Storage for the scanned items
@@ -67,11 +58,22 @@ namespace Market.Checkout.Domains
 
         public void Scan(string v)
         {
-            if (!_scannedItems.ContainsKey(v))
+
+            if (_rules.Any(S => S.Sku.Equals(v, StringComparison.OrdinalIgnoreCase)))
             {
-                _scannedItems[v] = 0;
+                if (!_scannedItems.ContainsKey(v))
+                {
+                    _scannedItems[v] = 0;
+                }
+                _scannedItems[v]++;
             }
-            _scannedItems[v]++;
+            else
+            {
+                //I wanted to throw a exception.
+                //This would be very handy in a real world scenario.
+                //ex : Logging
+                throw new ArgumentException("Item does not exist");
+            }
         }
     }
 }

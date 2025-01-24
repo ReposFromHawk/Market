@@ -189,3 +189,31 @@ REFACTORING AND EXTENDING THE CODE
         So it fails to compile now.
 
 In this stage Pricing Rules now contains the standard prices and all calculations look correct.
+
+
+**STEP 11**
+
+I created the following test.
+
+        [TestCase("U")]
+        [TestCase("M")]
+        [TestCase("I")]
+        [TestCase("T")]
+        public void Scan_Items_ThatDontExist_ShouldThrowException(string sku)
+        {
+            var ex=Assert.Throws<Exception>(() => _checkout.Scan(sku));
+            Assert.That(ex!=null, "Expected exception to be thrown");
+        }
+
+This is failing since there is no exception.
+So Needs fixing.
+
+It is now throwing a meaningful exception.
+
+We can also create our own exception types and handle them in specific ways based on the architecture and the requirements.
+
+We can add validation as well.
+
+This is TDD in a nutshell.
+
+Erdem

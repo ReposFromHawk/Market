@@ -91,6 +91,14 @@ namespace Market.Checkout.Tests
             Assert.That(expectedPrice == checkoutTotal, $"Expected price of items to cost {expectedPrice} But got {checkoutTotal}");
         }
 
-
+        [TestCase("U")]
+        [TestCase("M")]
+        [TestCase("I")]
+        [TestCase("T")]
+        public void Scan_Items_ThatDontExist_ShouldThrowException(string sku)
+        {
+            var ex = Assert.Throws<ArgumentException>(() => _checkout.Scan(sku));
+            Assert.That(ex.Message.Equals("Item does not exist", StringComparison.OrdinalIgnoreCase));
+        }
     }
 }
