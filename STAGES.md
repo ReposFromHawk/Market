@@ -78,3 +78,8 @@ Assert.That(80 == checkoutTotal, Is.True)
 Internally we created a dictionary to store items' prices.
 After scanning the items, we saw that the realted test past.
 Scan_MultipleItems_A_B_ShouldReturnPriceOf80
+
+**STEP 6**
+
+Refactor first tests not to use hard coded values.
+We should be able to test with multiple cases.
