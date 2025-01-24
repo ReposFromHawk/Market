@@ -71,3 +71,10 @@ Assert.That(80 == checkoutTotal, Is.True)
   Expected: True
   But was:  False
 
+  So after this we need to refactor this.
+
+**STEP 5**
+
+Internally we created a dictionary to store items' prices.
+After scanning the items, we saw that the realted test past.
+Scan_MultipleItems_A_B_ShouldReturnPriceOf80
