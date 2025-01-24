@@ -83,3 +83,57 @@ Scan_MultipleItems_A_B_ShouldReturnPriceOf80
 
 Refactor first tests not to use hard coded values.
 We should be able to test with multiple cases.
+
+**STEP 7**
+
+We need to implement the sku multiple pricing feature.
+It works in rule basis.
+Like an item have a differenrt price with condition of n sales number.
+Example is ;
+3 A Sums as 130
+2 B Sums as 45
+
+So I created a test for single special offers.
+
+Scan_MultipleSingleSkuItems_ShouldReturnCorrectToatalPrice
+
+With Given Cases Results as Follows :
+
+       { "A", "A", "A" }, 130 }             FAILED
+       { "A", "A"}, 100 }                   PASS
+       { "A", "A", "A", "A", "A","A"},260 } FAILED
+
+Now We need to fix this.
+
+In Spec it is given that :
+    1. Pricing rules change frequently,
+    2. There is a requirement to be able to pass pricing rules each time before scanning starts.
+    This should be able to handle special offers per sku.
+
+A PriceRule class added to solution as soon as we wanted to pass this to Checkout constructor in last test.
+So tests fail now.
+We are again in the Red stage.
+
+After this stage again Some Previous tests with no rule related ones are passing the tests. But Rule Related Tests are failing.
+
+Now when I run the tests, the following results shown :
+
+   Source: CheckoutTests.cs line 64
+   Duration: 23 ms
+
+  Message: 
+  Expected price of items to cost 130
+Assert.That(expectedPrice == checkoutTotal, Is.True)
+  Expected: True
+  But was:  False
+
+Scan_MultipleSingleSkuItems_ShouldReturnCorrectTotalPrice(System.Collections.Generic.List`1[System.String],260)
+   Source: CheckoutTests.cs line 64
+   Duration: < 1 ms
+
+  Message: 
+  Expected price of items to cost 260
+Assert.That(expectedPrice == checkoutTotal, Is.True)
+  Expected: True
+  But was:  False
+
