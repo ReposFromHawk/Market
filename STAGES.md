@@ -54,3 +54,20 @@ Therefor I added the logic to return 50 for SKU A which is hard coded.
 This will pass the test.
 Since this is the first passing test, and the logic is decoupled, the next stages shouldn't fail this test for successul development process.
 
+**STEP 4**
+
+We need to scan multiple items. There for I create a test to see if multiple item scans work and their sums are correct.
+The first test will scan A and B respectively and the GetTotalPrice is expected to return 80.
+
+The first run resulted as follows:
+
+ Scan_MultipleItems_A_B_ShouldReturnPriceOf80
+   Source: CheckoutTests.cs line 32
+   Duration: 20 ms
+
+  Message: 
+  Expected price of items to cost 80
+Assert.That(80 == checkoutTotal, Is.True)
+  Expected: True
+  But was:  False
+
