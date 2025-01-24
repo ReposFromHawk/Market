@@ -19,22 +19,26 @@ namespace Market.Checkout.Domains
 
 
         //Storage for the scanned items
-        ICollection<string> _scannedItems;
-        public CheckOut() { _scannedItems = new List<string>(); }
+        private readonly Dictionary<string, int> _scannedItems;
+        public CheckOut() { _scannedItems = new Dictionary<string, int>(); }
 
         public int GetTotalPrice()
         {
             int total = 0;
             foreach (var item in _scannedItems)
             {
-                total += _itemPrices[item];
+                total += _itemPrices[item.Key] * item.Value;
             }
             return total;
         }
 
         public void Scan(string v)
         {
-            _scannedItems.Add(v);
+            if (!_scannedItems.ContainsKey(v))
+            {
+                _scannedItems[v] = 0;
+            }
+            _scannedItems[v]++;
         }
     }
 }
